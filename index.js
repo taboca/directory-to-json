@@ -2,11 +2,7 @@ var sys = require("sys"),
     path = require("path"),
     fs = require("fs")
     url = require("url"),
-    config_pdf = require("./config_pdf.js"),
     shell = require('shelljs'),
-    marked = require('marked'),
-    cheerio = require('cheerio'),
-    pdf = require('html-pdf'),
     traverse = require('./traverseJSON.js'),
     http = require("http");
 
