@@ -4,17 +4,6 @@ var sys = require("sys"),
     url = require("url"),
     shell = require('shelljs');
 
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: true,
-  smartLists: true,
-  smartypants: false
-});
-
 var traverse = {
 
   indexes : {},
@@ -25,7 +14,6 @@ var traverse = {
     this.indexes['root'] = {
       'dir': path.join(__dirname,indexDirectory),
       'shortPath': indexDirectory,
-      'index': path.join(indexDirectory, "index.txt"),
       'childs': new Array()
     }
 
@@ -33,9 +21,6 @@ var traverse = {
     this.traverseDir(this.indexes['root']);
 
     console.log(JSON.stringify(this.indexes));
-    //this.parseIndex(indexPath, function(bufferFile) {
-    //    console.log('Expanded: ' + marked(bufferFile))
-    //});
 
   },
 
@@ -56,7 +41,6 @@ var traverse = {
           var childNode = {
             'shortPath': file,
             'dir': currDir,
-            'index': path.join(currDir, "index.txt"),
             'expanded':false,
             'childs': new Array()
           }
