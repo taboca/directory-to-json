@@ -2,5 +2,5 @@
 
 npm install
 
-node index.js base_example
+node index.js my_example_subdirectory
 
