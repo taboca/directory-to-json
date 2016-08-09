@@ -8,6 +8,7 @@ var sys = require("sys"),
 
 function init() {
   var parsedTree = traverse.init(process.argv[2]);
+  console.log(parsedTree);
 }
 
 init();

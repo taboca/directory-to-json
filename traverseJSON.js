@@ -10,7 +10,7 @@ var traverse = {
 
   init: function (indexDirectory) {
 
-    console.log("Will traverse " + indexDirectory);
+    //console.log("Will traverse " + indexDirectory);
     this.indexes['root'] = {
       'dir': path.join(__dirname,indexDirectory),
       'shortPath': indexDirectory,
@@ -20,36 +20,45 @@ var traverse = {
     shell.cd(path.join(__dirname,indexDirectory));
     this.traverseDir(this.indexes['root']);
 
-    console.log(JSON.stringify(this.indexes));
+    return JSON.stringify(this.indexes);
 
   },
 
   traverseDir: function (currentNode) {
-    console.log('Current node child len='+currentNode.childs.length);
+    //console.log('Current node child len='+currentNode.childs.length);
 
     if(currentNode.childs.length==0)
      {
-      console.log('Not populated, entering '+currentNode.shortPath)
+      //console.log('Not populated, entering '+currentNode.shortPath)
       var totalDir = 0;
       var i=0;
       shell.ls('-d','*').forEach(function(file) {
         //console.log(shell.pwd());
-        console.log('Listed: ' + file);
+        //console.log('Listed: ' + file);
         if (shell.test('-d', file)) {
           var currDir = path.join(currentNode.dir,file);
-          console.log('Checking dir = ' + file);
+          //console.log('Checking dir = ' + file);
           var childNode = {
             'shortPath': file,
             'dir': currDir,
-            'expanded':false,
+            'expands':true,
             'childs': new Array()
           }
 
           currentNode.childs.push(childNode);
+
           shell.cd(currDir);
           traverse.traverseDir(childNode);
           shell.cd('..');
         } else {
+
+          var childNode = {
+            'shortPath': file,
+            'dir': currDir,
+            'expands':false,
+            'childs': null
+          }
+          currentNode.childs.push(childNode);
 
         }
       });
